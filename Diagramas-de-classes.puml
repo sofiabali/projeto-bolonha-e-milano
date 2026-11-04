@@ -1,0 +1,117 @@
+
+@startuml
+title Bolonha e Milano - Diagrama de Classes - Etapa 4
+
+skinparam classAttributeIconSize 0
+
+class Main {
+    +main(args: String[]): void
+}
+
+class Menu {
+    -scanner: Scanner
+    -emExecucao: boolean
+    -jogador: Jogador
+    -cidade: Cidade
+    -mercado: Mercado
+    -agricultura: Agricultura
+
+    +executar(): void
+    -exibirOpcoes(): void
+    -lerOpcao(): int
+    -processarOpcao(opcao: int): void
+    -iniciarNovoJogo(): void
+    -exibirStatus(): void
+    -abrirMercado(): void
+    -abrirAgricultura(): void
+    -colher(): void
+    -distribuirAlimentos(): void
+    -exibirSobre(): void
+}
+
+class Jogador {
+    -nome: String
+    -titulo: String
+
+    +getNome(): String
+    +getTitulo(): String
+    +setTitulo(titulo: String): void
+}
+
+class Cidade {
+    -nome: String
+    -anoAtual: int
+    -dono: Jogador
+    -florins: int
+    -terras: int
+    -graos: int
+    -servos: int
+
+    +getNome(): String
+    +getAnoAtual(): int
+    +getDono(): Jogador
+    +getFlorins(): int
+    +getTerras(): int
+    +getGraos(): int
+    +getServos(): int
+
+    +avancarAno(): void
+
+    +adicionarFlorins(qtd: int): void
+    +removerFlorins(qtd: int): boolean
+
+    +adicionarTerras(qtd: int): void
+    +removerTerras(qtd: int): boolean
+
+    +adicionarGraos(qtd: int): void
+    +removerGraos(qtd: int): boolean
+
+    +adicionarServos(qtd: int): void
+    +removerServos(qtd: int): boolean
+
+    +exibirStatus(): void
+}
+
+class Mercado {
+    -PRECO_GRAO: int
+    -PRECO_TERRA: int
+
+    +getPrecoGrao(): int
+    +getPrecoTerra(): int
+
+    +comprarGraos(c: Cidade, qtd: int): boolean
+    +venderGraos(c: Cidade, qtd: int): boolean
+    +comprarTerras(c: Cidade, qtd: int): boolean
+    +venderTerras(c: Cidade, qtd: int): boolean
+}
+
+class Agricultura {
+    -HECTARES_POR_SERVO: int
+    -RENDIMENTO_POR_HECTARE: int
+    -SERVOS_POR_GRAO: int
+    -CRESCIMENTO_PERCENTUAL: int
+    -PERCENTUAL_MINIMO: int
+    -PERCENTUAL_MAXIMO: int
+
+    +processarColheita(cidade: Cidade): int
+    +distribuirAlimentos(cidade: Cidade, percentual: int): boolean
+}
+
+Main --> Menu : cria
+Menu --> Jogador : utiliza
+Menu --> Cidade : utiliza
+Menu --> Mercado : utiliza
+Menu --> Agricultura : utiliza
+Cidade --> Jogador : dono
+
+note bottom of Mercado
+  Recebe Cidade como parâmetro.
+  Não armazena referência à Cidade.
+end note
+
+note bottom of Agricultura
+  Recebe Cidade como parâmetro.
+  Não armazena referência à Cidade.
+end note
+
+@enduml

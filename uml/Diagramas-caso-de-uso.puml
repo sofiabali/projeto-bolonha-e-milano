@@ -1,0 +1,42 @@
+
+@startuml
+title Bolonha e Milano - Diagrama de Casos de Uso - Etapa 4
+
+left to right direction
+
+actor Jogador
+
+rectangle "Bolonha e Milano" {
+
+    usecase "Iniciar novo jogo" as UC1
+    usecase "Ver status da cidade" as UC2
+    usecase "Acessar mercado" as UC3
+    usecase "Acessar agricultura" as UC4
+    usecase "Ver informações\nsobre o jogo" as UC5
+    usecase "Sair do jogo" as UC6
+
+    usecase "Comprar grãos" as UC7
+    usecase "Vender grãos" as UC8
+    usecase "Comprar terras" as UC9
+    usecase "Vender terras" as UC10
+
+    usecase "Colher\n(processar safra)" as UC11
+    usecase "Distribuir alimentos" as UC12
+}
+
+Jogador --> UC1
+Jogador --> UC2
+Jogador --> UC3
+Jogador --> UC4
+Jogador --> UC5
+Jogador --> UC6
+
+UC7 ..> UC3 : <<extend>>
+UC8 ..> UC3 : <<extend>>
+UC9 ..> UC3 : <<extend>>
+UC10 ..> UC3 : <<extend>>
+
+UC11 ..> UC4 : <<extend>>
+UC12 ..> UC4 : <<extend>>
+
+@enduml
